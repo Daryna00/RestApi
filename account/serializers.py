@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+
 User = get_user_model()
 
 
@@ -19,8 +20,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
     def update(self, instance, validated_data):
         instance.customer_card = validated_data.get('customer_card', instance.customer_card)
-        instance.password = validated_data.get('password', instance.password)
         instance.name = validated_data.get('name', instance.name)
+        password = validated_data.get('password')
+        instance.set_password(password)
         instance.save()
 
         return instance

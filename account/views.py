@@ -37,6 +37,7 @@ class UserView(APIView):
 
 
     def put(self, request, id):
+
         saved_user = get_object_or_404(User.objects.all(), id=id)
         data = request.data.get('user')
         serializer = UserSerializer(instance=saved_user, data=data, partial=True)
